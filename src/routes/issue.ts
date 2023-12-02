@@ -8,7 +8,7 @@ class GetIssue extends OpenAPIRoute {
     tags: ["Issues"],
     summary: "Get Issue",
     parameters: {
-      ticket: Query(z.string()),
+      id: Query(z.string()),
     },
     responses: {
       "200": {
@@ -26,9 +26,9 @@ class GetIssue extends OpenAPIRoute {
     context: any,
     data: Record<string, any>
   ) {
-    const { ticket } = data.query;
+    const { id } = data.query;
 
-    const [team, number] = ticket.split("-");
+    const [team, number] = id.split("-");
     const issuesFilter = {
       and: [
         { team: { key: { eq: team } } },
@@ -38,6 +38,8 @@ class GetIssue extends OpenAPIRoute {
 
     const issues = await getLinearIssues(env.LINEAR_KEY, issuesFilter);
     const issue = issues[0];
+
+    console.log('[ISSUE] Issue:', id);
 
     return { issue };
   }

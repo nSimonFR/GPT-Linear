@@ -1,6 +1,6 @@
 import { OpenAPIRouter } from "@cloudflare/itty-router-openapi";
-import GetIssue from "./routes/getissue";
-// import RecentChangelog from "./routes/recentchangelog";
+import RecentChangelog from "./routes/changelog";
+import GetIssue from "./routes/issue";
 
 const router = OpenAPIRouter({
 	schema: {
@@ -15,10 +15,10 @@ const router = OpenAPIRouter({
 });
 
 router.get("/linear/issue", GetIssue);
-// router.get("/linear/changelog", RecentChangelog);
+router.get("/linear/changelog", RecentChangelog);
 
 // Redirect root request to the /docs page
-router.original.get("/", (request) =>
+router.original.get("/", (request: any) =>
 	Response.redirect(`${request.url}docs`, 302)
 );
 
