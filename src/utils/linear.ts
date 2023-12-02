@@ -1,4 +1,4 @@
-import { Issue, LinearClient, Project, User, WorkflowState } from "@linear/sdk";
+import { Issue, LinearClient, Project, Team, User, WorkflowState } from "@linear/sdk";
 import { IssueType } from "./types";
 
 const issueNode = `
@@ -60,6 +60,9 @@ const transformIssue = (issue: Issue): IssueType => {
   const assignee = issue.assignee as unknown as User;
   const assigneeName = assignee?.name;
 
+  const team = issue.team as unknown as Team;
+  const teamName = team?.name;
+
   const state = issue.state as unknown as WorkflowState;
   const stateName = state?.name;
 
@@ -80,7 +83,7 @@ const transformIssue = (issue: Issue): IssueType => {
     projectUrl,
 
     assigneeName,
-
+    teamName,
     stateName,
 
     subIssues,
@@ -90,8 +93,8 @@ const transformIssue = (issue: Issue): IssueType => {
 export const getLinearIssues = async (apiKey: string, issuesFilter: any) => {
   const linearClient = new LinearClient({ apiKey });
 
-  const issueQuery = `query Issues($issuesFilter: IssueFilter) {
-    issues(filter: $issuesFilter) {
+  const issueQuery = `query Issues($issuesFilter: IssueFilter, $orderBy: PaginationOrderBy) {
+    issues(filter: $issuesFilter, orderBy: $orderBy) {
       nodes {
         ${issueNode}
       }
@@ -100,7 +103,7 @@ export const getLinearIssues = async (apiKey: string, issuesFilter: any) => {
 
   const response: any = await linearClient.client.rawRequest(
     issueQuery,
-    { issuesFilter }
+    { issuesFilter, orderBy: "updatedAt" }
   );
   const issues = response.data.issues.nodes;
 
@@ -111,8 +114,8 @@ export const getLinearIssues = async (apiKey: string, issuesFilter: any) => {
 export const searchLinearIssues = async (apiKey: string, term: string) => {
   const linearClient = new LinearClient({ apiKey });
 
-  const searchIssuesQuery = `query SearchIssues($term: String!) {
-    searchIssues(term: $term) {
+  const searchIssuesQuery = `query SearchIssues($term: String!, $orderBy: PaginationOrderBy) {
+    searchIssues(term: $term, orderBy: $orderBy) {
       nodes {
         ${issueNode}
       }
@@ -121,7 +124,7 @@ export const searchLinearIssues = async (apiKey: string, term: string) => {
 
   const response: any = await linearClient.client.rawRequest(
     searchIssuesQuery,
-    { term }
+    { term, orderBy: "updatedAt" }
   );
   const issues = response.data.searchIssues.nodes;
 

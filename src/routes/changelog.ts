@@ -13,13 +13,13 @@ class RecentChangelog extends OpenAPIRoute {
     parameters: {
       dateFrom: Query(z.string().optional()),
       dateTo: Query(z.string().optional()),
-      // state: Query(z.string().optional(), { example: 'Completed' }),
     },
     responses: {
       "200": {
         description: "Issue",
         schema: {
           dateFrom: z.date(),
+          dateTo: z.date(),
           issues: [Issue],
         },
       },
@@ -44,6 +44,11 @@ class RecentChangelog extends OpenAPIRoute {
       labels: {
         name: {
           eq: "EPIC"
+        }
+      },
+      team: {
+        key: {
+          nin: ["DISCO"]
         }
       }
     };

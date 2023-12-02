@@ -14,7 +14,7 @@ export const Issue = z.object({
   projectUrl: z.string(),
 
   assigneeName: z.string(),
-
+  teamName: z.string(),
   stateName: z.string(),
 
   subIssues: z.array(z.object({
