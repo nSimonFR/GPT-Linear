@@ -1,0 +1,5 @@
+.env
+.wrangler
+wrangler-local-state
+dist
+node_modules
