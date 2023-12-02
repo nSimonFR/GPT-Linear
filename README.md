@@ -1,33 +1,14 @@
-## Template: worker-openapi
+# GPT Linear
 
-[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/worker-openapi)
+An API to power an OpenAI GPT to use in conjonction with Linear.
 
-This template demonstrates using the [`itty-router-openapi`](https://github.com/cloudflare/itty-router-openapi) package to add openapi 3 schema generation and validation.
-
-You can try this template in your browser [here](https://worker-openapi-example.radar.cloudflare.com/docs)!
+Basically, a [worker-openapi](https://github.com/cloudflare/itty-router-openapi) wrapper around [linear sdk](https://developers.linear.app/docs/sdk/getting-started) hosted on [cloudflare workers](https://developers.cloudflare.com/workers/).
 
 ## Setup
 
-To create a `my-project` directory using this template, run:
-
-```sh
-$ npx wrangler generate my-project worker-openapi
-# or
-$ yarn wrangler generate my-project worker-openapi
-# or
-$ pnpm wrangler generate my-project worker-openapi
-```
-
-## Local development
-
-Run `wrangler dev` and head to `/docs` our `/redocs` with your browser.
-
-You'll be greeted with an OpenAPI page that you can use to test and call your endpoints.
-
-## Deploy
-
-Once you are ready, you can publish your code by running the following command:
-
-```sh
-$ wrangler deploy
-```
+- Update [index](./index.js) with your wrangler url and remove specifics implementation details you don't need
+- Patch [rollup-plugin-node-polyfills](node_modules/rollup-plugin-node-polyfills/polyfills/http-lib/capability.js)
+- Run `npm run deploy`
+- Navigate to your wrangler /openapi.json and copy the content
+- Generate Linear API Key
+- [Setup your custom GPT](https://chat.openai.com/gpts/editor/) with [INSTRUCTIONS](./INSTRUCTIONS.md) and your url as action

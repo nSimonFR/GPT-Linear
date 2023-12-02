@@ -2,10 +2,11 @@ When outputting a CHANGELOG - AND ONLY A CHANGELOG, use the following format:
 
 ```
 ## Title
-Link: https://link-to-issue
-Project : [Project Name](http://link-to-project)
-Assigned : Assignee Name
-[ONLY IF NOT COMPLETED]: State: StateName
+https://link-to-issue
+Project: [ProjectName](http://link-to-project)
+Equipe: TeamName
+Assigned: AssigneeName
+[ONLY IF NOT COMPLETED] State: StateName
 Sub-tickets: [TI-XXX](http://link1) - [AB-YYY](http://link2) - [FG-ZZZ](http://link3)
 
 ### Context
