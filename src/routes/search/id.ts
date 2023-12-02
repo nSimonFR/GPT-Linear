@@ -1,12 +1,12 @@
 import { OpenAPIRoute, Query } from "@cloudflare/itty-router-openapi";
 import { z } from "zod";
-import getLinearIssues from "../utils/linear";
-import { Issue } from "../utils/types";
+import { getLinearIssues } from "../../utils/linear";
+import { Issue } from "../../utils/types";
 
-class GetIssue extends OpenAPIRoute {
+class IssueId extends OpenAPIRoute {
   static schema = {
-    tags: ["Issues"],
-    summary: "Get Issue",
+    tags: ["Issue", "Search"],
+    summary: "Get Issue by Identifier (AB-123)",
     parameters: {
       id: Query(z.string()),
     },
@@ -39,10 +39,10 @@ class GetIssue extends OpenAPIRoute {
     const issues = await getLinearIssues(env.LINEAR_KEY, issuesFilter);
     const issue = issues[0];
 
-    console.log('[ISSUE] Issue:', id);
+    console.log('[ISSUE ID] Issue:', id);
 
     return { issue };
   }
 }
 
-export default GetIssue;
+export default IssueId;

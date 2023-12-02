@@ -1,15 +1,15 @@
 import { OpenAPIRoute, Query } from "@cloudflare/itty-router-openapi";
 import { DateTime } from "luxon";
 import { z } from "zod";
-import getLinearIssues from "../utils/linear";
+import { getLinearIssues } from "../utils/linear";
 import { Issue } from "../utils/types";
 
 const MINUS_DAYS = 7;
 
 class RecentChangelog extends OpenAPIRoute {
   static schema = {
-    tags: ["Issues"],
-    summary: "Get recently completed issues (Default = 7 days - excludes non-EPICs)",
+    tags: ["Issue"],
+    summary: "Get completed issues (Default = 7 days - excludes non-EPICs)",
     parameters: {
       dateFrom: Query(z.string().optional()),
       dateTo: Query(z.string().optional()),
@@ -20,7 +20,7 @@ class RecentChangelog extends OpenAPIRoute {
         description: "Issue",
         schema: {
           dateFrom: z.date(),
-          issues: Issue,
+          issues: [Issue],
         },
       },
     },
