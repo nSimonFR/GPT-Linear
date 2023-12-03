@@ -14,6 +14,16 @@ const router = OpenAPIRouter({
 			version: "1.0",
 		},
 	},
+	aiPlugin: {
+		name_for_human: 'Linear GPT',
+		name_for_model: 'linear_gpt',
+		description_for_human: "Access linear SDK",
+		description_for_model:
+			"Plugin for retrieving information from Linear API. Use it whenever a user asks something that might be related to Issues, Projects, Tickets, Milestones etc.",
+		contact_email: 'nsimon@pm.me',
+		legal_info_url: 'https://linear.app/privacy',
+		logo_url: 'https://linear.app/cdn-cgi/imagedelivery/fO02fVwohEs9s9UHFwon6A/1f571644-39f9-4a0d-a4eb-0dd6eea62a00/f=auto,q=95,fit=scale-down,metadata=none',
+	},
 });
 
 router.get("/linear/issue/id", IssueId);

@@ -1,6 +1,6 @@
 # GPT Linear
 
-An API to power an OpenAI GPT to use in conjonction with Linear.
+An API to power an OpenAI GPT to use Linear !
 
 Basically, a [worker-openapi](https://github.com/cloudflare/itty-router-openapi) wrapper around [linear sdk](https://developers.linear.app/docs/sdk/getting-started) hosted on [cloudflare workers](https://developers.cloudflare.com/workers/).
 
