@@ -42,7 +42,7 @@ class ActiveIssues extends OpenAPIRoute {
       }
     };
 
-    const issues = await getLinearIssues(env.LINEAR_KEY, issuesFilter);
+    const issues = await getLinearIssues(env.linearClient, issuesFilter);
     console.log('[CHANGELOG] Issues:', issues.length);
 
     return { issues };

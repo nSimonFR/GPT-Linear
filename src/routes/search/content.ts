@@ -29,7 +29,7 @@ class IssueContent extends OpenAPIRoute {
   ) {
     const { content } = data.query;
 
-    const issues = await searchLinearIssues(env.LINEAR_KEY, content);
+    const issues = await searchLinearIssues(env.token, content);
 
     console.log('[ISSUE SEARCH] Issue:', issues.length);
 

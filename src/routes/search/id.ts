@@ -36,7 +36,7 @@ class IssueId extends OpenAPIRoute {
       ],
     };
 
-    const issues = await getLinearIssues(env.LINEAR_KEY, issuesFilter);
+    const issues = await getLinearIssues(env.linearClient, issuesFilter);
     const issue = issues[0];
 
     console.log('[ISSUE ID] Issue:', id);

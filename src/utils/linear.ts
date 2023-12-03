@@ -90,9 +90,7 @@ const transformIssue = (issue: Issue): IssueType => {
   };
 }
 
-export const getLinearIssues = async (apiKey: string, issuesFilter: any) => {
-  const linearClient = new LinearClient({ apiKey });
-
+export const getLinearIssues = async (linearClient: LinearClient, issuesFilter: any) => {
   const issueQuery = `query Issues($issuesFilter: IssueFilter, $orderBy: PaginationOrderBy) {
     issues(filter: $issuesFilter, orderBy: $orderBy) {
       nodes {
@@ -111,9 +109,7 @@ export const getLinearIssues = async (apiKey: string, issuesFilter: any) => {
 };
 
 
-export const searchLinearIssues = async (apiKey: string, term: string) => {
-  const linearClient = new LinearClient({ apiKey });
-
+export const searchLinearIssues = async (linearClient: LinearClient, term: string) => {
   const searchIssuesQuery = `query SearchIssues($term: String!, $orderBy: PaginationOrderBy) {
     searchIssues(term: $term, orderBy: $orderBy) {
       nodes {

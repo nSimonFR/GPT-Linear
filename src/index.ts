@@ -1,4 +1,5 @@
 import { OpenAPIRouter } from "@cloudflare/itty-router-openapi";
+import authenticateLinear from "./middlewares/linear";
 import ActiveIssues from "./routes/active";
 import Changelog from "./routes/changelog";
 import IssueContent from "./routes/search/content";
@@ -13,6 +14,9 @@ const router = OpenAPIRouter({
 			title: "Worker OpenAPI Example",
 			version: "1.0",
 		},
+		security: [
+			{ BearerAuth: [] },
+		],
 	},
 	aiPlugin: {
 		name_for_human: 'Linear GPT',
@@ -25,6 +29,17 @@ const router = OpenAPIRouter({
 		logo_url: 'https://linear.app/cdn-cgi/imagedelivery/fO02fVwohEs9s9UHFwon6A/1f571644-39f9-4a0d-a4eb-0dd6eea62a00/f=auto,q=95,fit=scale-down,metadata=none',
 	},
 });
+
+router.registry.registerComponent(
+	'securitySchemes',
+	'BearerAuth',
+	{
+		type: 'http',
+		scheme: 'bearer',
+	},
+);
+
+router.all('/linear/*', authenticateLinear);
 
 router.get("/linear/issue/id", IssueId);
 router.get("/linear/issue/content", IssueContent);
